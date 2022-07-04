@@ -10,34 +10,30 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
 
-  constructor(@Inject('user-management') private readonly client: ClientProxy,@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@Inject('user-management') private readonly client: ClientProxy) {}
 
-  async create(createUserDto: CreateUserDto):Promise<User> {
-    return await new this.userModel(createUserDto).save();
+  async findAll(pattern: string) {
+    return await this.client.send(pattern,pattern).toPromise();
   }
 
-  async findAll() {
-    return await this.userModel.find();
+  async findOne(pattern: string,email: string):Promise<User | undefined> {
+    return await this.client.send(pattern, email).toPromise();
   }
 
-  async findOne(email: string):Promise<User | undefined> {
-    return await this.userModel.findOne({email});
-  }
-
-  async update(_id: string, updateUserDto: UpdateUserDto) {
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(updateUserDto.password, salt);
-    updateUserDto.password = hashPassword;
-    return await this.userModel.updateOne({_id},{$set:{...updateUserDto}});
+  async update(pattern: string,_id: string, updateUserDto: UpdateUserDto) {
+    updateUserDto._id = _id;
+    return await this.client.send(pattern, updateUserDto).toPromise();
   }
 
   async remove(pattern: string,email: string) {
-    this.client.send(pattern, email).toPromise();
-    return await this.userModel.deleteOne({email});
+    return await this.client.send(pattern, email).toPromise();
   }
 
   async signup(pattern: string,data: CreateUserDto) {
     return await this.client.send(pattern, data).toPromise();
-     
+  }
+
+  async forgot(pattern: string,data: any) {
+    return await this.client.send(pattern, data).toPromise();
   }
 }

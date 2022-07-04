@@ -9,35 +9,40 @@ import { User } from 'src/schemas/user.schema';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
-
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return this.usersService.findAll('user-findall');
   }
 
   @Get(':email')
   findOne(@Param('email') email: string) {
-    return this.usersService.findOne(email);
+    return this.usersService.findOne('user-findone',email);
   }
 
   @Put(':_id')
   update(@Param('_id') _id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(_id, updateUserDto);
+    return this.usersService.update('user-update',_id, updateUserDto);
   }
 
   @Delete(':email')
   remove(@Param('email') email: string) {
-    return this.usersService.remove('user-management',email);
+    return this.usersService.remove('user-delete',email);
   }
-
-
 
   @Post('/signup')
   signup(@Body() data: CreateUserDto) {
     return this.usersService.signup('user-management',data);
+  }
+
+  @Post('/forgotpassword')
+  async forgot(@Body('email') email: string) {
+    const crypto = require('crypto');
+    const token = crypto.randomBytes(10).toString('hex'); 
+    const created_at = new Date().getTime();
+    return this.usersService.forgot('forgot-password',{
+      email,
+      token,
+      created_at
+    });
   }
 }

@@ -21,7 +21,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
     
-  MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+  ],
   controllers: [UsersController],
   providers: [UsersService],
   exports:[UsersService]
