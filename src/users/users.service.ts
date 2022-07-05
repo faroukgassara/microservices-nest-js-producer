@@ -36,4 +36,8 @@ export class UsersService {
   async forgot(pattern: string,data: any) {
     return await this.client.send(pattern, data).toPromise();
   }
+
+  async resetpassword(pattern: string,data: any) {
+    return await this.client.send(pattern, data).toPromise();
+  }
 }

@@ -39,10 +39,22 @@ export class UsersController {
     const crypto = require('crypto');
     const token = crypto.randomBytes(10).toString('hex'); 
     const created_at = new Date().getTime();
+    const confirmed_at = null;
     return this.usersService.forgot('forgot-password',{
       email,
       token,
-      created_at
+      created_at,
+      confirmed_at
+    });
+  }
+
+
+  @Post('/resetpassword/:email/:token')
+  async resetpassword(@Param('email') email: string,@Param('token') token: string,@Body('password') password: string) {
+    return this.usersService.resetpassword('reset-password',{
+      email,
+      token,
+      password,
     });
   }
 }
