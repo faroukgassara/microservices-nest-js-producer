@@ -40,4 +40,8 @@ export class UsersService {
   async resetpassword(pattern: string,data: any) {
     return await this.client.send(pattern, data).toPromise();
   }
+
+  async confirmaccount(pattern: string,data: any) {
+    return await this.client.send(pattern, data).toPromise();
+  }
 }

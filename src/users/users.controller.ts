@@ -34,27 +34,25 @@ export class UsersController {
     return this.usersService.signup('user-management',data);
   }
 
-  @Post('/forgotpassword')
-  async forgot(@Body('email') email: string) {
+  @Post('/forgotpassword/:email')
+  async forgot(@Param('email') email: string) {
+    
     const crypto = require('crypto');
     const token = crypto.randomBytes(10).toString('hex'); 
     const created_at = new Date().getTime();
     const confirmed_at = null;
-    return this.usersService.forgot('forgot-password',{
-      email,
-      token,
-      created_at,
-      confirmed_at
-    });
+
+    return this.usersService.forgot('forgot-password',{email,token,created_at,confirmed_at});
   }
 
 
   @Post('/resetpassword/:email/:token')
   async resetpassword(@Param('email') email: string,@Param('token') token: string,@Body('password') password: string) {
-    return this.usersService.resetpassword('reset-password',{
-      email,
-      token,
-      password,
-    });
+    return this.usersService.resetpassword('reset-password',{email,token,password,});
+  }
+
+  @Post('/confirmaccount/:email/:token')
+  async confirmaccount(@Param('email') email: string,@Param('token') token: string) {
+    return this.usersService.confirmaccount('confirm-findall',{email,token,});
   }
 }
