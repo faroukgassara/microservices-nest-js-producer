@@ -7,6 +7,9 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { APP_FILTER } from '@nestjs/core';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthModule } from './auth/auth.module';
+import { ApplicationsModule } from './applications/applications.module';
+import { RolesModule } from './roles/roles.module';
+import { AffectationModule } from './affectation/affectation.module';
 @Module({
   imports: [
     ClientsModule.register([
@@ -23,7 +26,10 @@ import { AuthModule } from './auth/auth.module';
       },
     ]),
     UsersModule,
-    AuthModule],
+    AuthModule,
+    ApplicationsModule,
+    RolesModule,
+    AffectationModule],
   controllers: [AppController],
   providers: [AppService,JwtModule,JwtService],
 })
