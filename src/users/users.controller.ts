@@ -45,7 +45,6 @@ export class UsersController {
     return this.usersService.forgot('forgot-password',{email,token,created_at,confirmed_at});
   }
 
-
   @Post('/resetpassword/:email/:token')
   async resetpassword(@Param('email') email: string,@Param('token') token: string,@Body('password') password: string) {
     return this.usersService.resetpassword('reset-password',{email,token,password,});
@@ -54,5 +53,10 @@ export class UsersController {
   @Post('/confirmaccount/:email/:token')
   async confirmaccount(@Param('email') email: string,@Param('token') token: string) {
     return this.usersService.confirmaccount('confirm-findall',{email,token,});
+  }
+
+  @Post('/AffectRoleToUser')
+  updatepush(@Body() data: any) {
+    return this.usersService.updatepush('user-AffectRoleToUser',data);
   }
 }

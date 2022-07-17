@@ -1,26 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { CreateAffectationDto } from './dto/create-affectation.dto';
 import { UpdateAffectationDto } from './dto/update-affectation.dto';
 
 @Injectable()
 export class AffectationService {
-  create(createAffectationDto: CreateAffectationDto) {
-    return 'This action adds a new affectation';
+
+  constructor(@Inject('user-management') private readonly client: ClientProxy) {} 
+
+
+  async create(createAffectationDto: CreateAffectationDto,pattern: string) {
+    return await this.client.send(pattern,createAffectationDto).toPromise();
   }
 
-  findAll() {
-    return `This action returns all affectation`;
+  async findAll(pattern: string) {
+    return await this.client.send(pattern,pattern).toPromise();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} affectation`;
+  async findOne(pattern: string, id: number) {
+    return await this.client.send(pattern, id).toPromise();
   }
 
   update(id: number, updateAffectationDto: UpdateAffectationDto) {
     return `This action updates a #${id} affectation`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} affectation`;
+  async remove(pattern: string,id: number) {
+    return await this.client.send(pattern, id).toPromise();
   }
 }

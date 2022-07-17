@@ -9,17 +9,17 @@ export class AffectationController {
 
   @Post()
   create(@Body() createAffectationDto: CreateAffectationDto) {
-    return this.affectationService.create(createAffectationDto);
+    return this.affectationService.create(createAffectationDto,'createAffectation');
   }
 
   @Get()
   findAll() {
-    return this.affectationService.findAll();
+    return this.affectationService.findAll('findAllAffectation');
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.affectationService.findOne(+id);
+    return this.affectationService.findOne('findOneAffectation',+id);
   }
 
   @Patch(':id')
@@ -29,6 +29,6 @@ export class AffectationController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.affectationService.remove(+id);
+    return this.affectationService.remove('removeAffectation',+id);
   }
 }
