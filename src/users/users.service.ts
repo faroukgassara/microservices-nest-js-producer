@@ -48,4 +48,8 @@ export class UsersService {
   async updatepush(pattern: string,data: any) {
     return await this.client.send(pattern, data).toPromise();
   }
+
+  async signin(pattern: string,data: any) {
+    return await this.client.send(pattern, data).toPromise();
+  }
 }

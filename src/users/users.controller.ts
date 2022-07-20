@@ -59,4 +59,9 @@ export class UsersController {
   updatepush(@Body() data: any) {
     return this.usersService.updatepush('user-AffectRoleToUser',data);
   }
+
+  @Post('signin')
+  async signin(@Body() data: any) {
+    return await  this.usersService.signin('sign-in',data);
+  }
 }

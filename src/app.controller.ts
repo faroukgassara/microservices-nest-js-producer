@@ -12,11 +12,10 @@ export class AppController {
   ) {}
   
 
-  // ***************** Sign In *****************
+  // ***************** Sign In SUPERADMIN *****************
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    await  this.appService.login('sign-in',req.user);
     return await this.authService.login(req.user);
   }
 
