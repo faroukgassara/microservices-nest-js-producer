@@ -24,9 +24,9 @@ export class UsersController {
     return this.usersService.update('user-update',_id, updateUserDto);
   }
 
-  @Delete(':email')
-  remove(@Param('email') email: string) {
-    return this.usersService.remove('user-delete',email);
+  @Delete(':_id')
+  remove(@Param('_id') _id: string) {
+    return this.usersService.remove('user-delete',_id);
   }
 
   @Post('/signup')

@@ -27,8 +27,8 @@ export class ApplicationsController {
     return this.applicationsService.update('updateApplication',_id, updateApplicationDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.applicationsService.remove('removeApplication',+id);
+  @Delete(':_id')
+  remove(@Param('_id') _id: string) {
+    return this.applicationsService.remove('removeApplication',_id);
   }
 }
