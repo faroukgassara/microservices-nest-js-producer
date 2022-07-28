@@ -27,4 +27,9 @@ export class ApplicationsService {
   async remove(pattern: string,_id: string) {
     return await this.client.send(pattern, _id).toPromise();
   }
+
+  async updatepush(pattern: string,data: any) {
+    return await this.client.send(pattern, data).toPromise();
+  }
+
 }

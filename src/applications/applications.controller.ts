@@ -31,4 +31,9 @@ export class ApplicationsController {
   remove(@Param('_id') _id: string) {
     return this.applicationsService.remove('removeApplication',_id);
   }
+
+  @Post('/AffectRoleToApp')
+  updatepush(@Body() data: any) {
+    return this.applicationsService.updatepush('app-AffectRoleToApp',data);
+  }
 }
