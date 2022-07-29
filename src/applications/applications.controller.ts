@@ -36,4 +36,9 @@ export class ApplicationsController {
   updatepush(@Body() data: any) {
     return this.applicationsService.updatepush('app-AffectRoleToApp',data);
   }
+
+  @Post('/DeleteRoleFromApp')
+  updatepull(@Body() data: any) {
+    return this.applicationsService.updatepush('app-DeleteRoleFromApp',data);
+  }
 }

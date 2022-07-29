@@ -32,4 +32,8 @@ export class ApplicationsService {
     return await this.client.send(pattern, data).toPromise();
   }
 
+  async updatepull(pattern: string,data: any) {
+    return await this.client.send(pattern, data).toPromise();
+  }
+
 }
