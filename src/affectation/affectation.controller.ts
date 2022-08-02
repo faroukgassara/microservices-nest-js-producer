@@ -31,4 +31,10 @@ export class AffectationController {
   remove(@Param('id') id: string) {
     return this.affectationService.remove('removeAffectation',+id);
   }
+
+  @Get('/findByUserEmail/:email')
+  findByUserEmail(@Param('email') email: string) {
+    return this.affectationService.findByUserEmail('findByUserEmail',email);
+  }
+  
 }

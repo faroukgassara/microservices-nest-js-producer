@@ -28,4 +28,8 @@ export class AffectationService {
   async remove(pattern: string,id: number) {
     return await this.client.send(pattern, id).toPromise();
   }
+
+  async findByUserEmail(pattern: string,email: string) {
+    return await this.client.send(pattern, email).toPromise();
+  }
 }
