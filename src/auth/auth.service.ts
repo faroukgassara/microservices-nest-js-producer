@@ -15,7 +15,7 @@ export class AuthService {
 
     const isMatch = await bcrypt.compare(password, user.password);
     
-    if (user && isMatch && user.locked == false && user.enabled == true) {
+    if (user && isMatch && user.locked == false && user.enabled == true && user.role== 'SUPERADMIN') {
       const { password, ...result } = user;
       return result;
     }else {

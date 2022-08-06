@@ -3,12 +3,6 @@ import mongoose, { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
 
-enum Role {
-  ADMIN ,
-  USER ,
-  SUPERADMIN 
-}
-
 @Schema()
 export class User {
   @Prop()
@@ -44,8 +38,8 @@ export class User {
   @Prop()
   phone : string;
 
-  @Prop({ type: String, enum: Role })
-  role: Role
+  @Prop()
+  role: string
 
 }
 

@@ -24,7 +24,7 @@ export class RolesService {
     return await this.client.send(pattern, updateRoleDto).toPromise();
   }
 
-  async remove(pattern: string,id: number) {
-    return await this.client.send(pattern, id).toPromise();
+  async remove(pattern: string,_id: string) {
+    return await this.client.send(pattern, _id).toPromise();
   }
 }
