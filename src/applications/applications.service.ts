@@ -6,33 +6,40 @@ import { UpdateApplicationDto } from './dto/update-application.dto';
 @Injectable()
 export class ApplicationsService {
 
-  constructor(@Inject('user-management') private readonly client: ClientProxy) {} 
+  constructor(@Inject('user-management') private readonly client: ClientProxy) { }
 
-  async create(createApplicationDto: CreateApplicationDto,pattern: string) {
-    return await this.client.send(pattern,createApplicationDto).toPromise();
+  // ***************** Create New Applicaton *****************
+  async create(createApplicationDto: CreateApplicationDto, pattern: string) {
+    return await this.client.send(pattern, createApplicationDto).toPromise();
   }
 
+  // ***************** Find All Applicatons *****************
   async findAll(pattern: string) {
-    return await this.client.send(pattern,pattern).toPromise();
+    return await this.client.send(pattern, pattern).toPromise();
   }
 
-  async findOne(pattern: string,id: number) {
+  // ***************** Find One Applicaton *****************
+  async findOne(pattern: string, id: number) {
     return await this.client.send(pattern, id).toPromise();
   }
 
-  async update(pattern: string,_id: string, updateApplicationDto: UpdateApplicationDto) {
+  // ***************** Update Applicaton *****************
+  async update(pattern: string, _id: string, updateApplicationDto: UpdateApplicationDto) {
     return await this.client.send(pattern, updateApplicationDto).toPromise();
   }
 
-  async remove(pattern: string,_id: string) {
+  // ***************** Delete Applicaton *****************
+  async remove(pattern: string, _id: string) {
     return await this.client.send(pattern, _id).toPromise();
   }
 
-  async updatepush(pattern: string,data: any) {
+  // ***************** Add Role To Applicaton *****************
+  async updatepush(pattern: string, data: any) {
     return await this.client.send(pattern, data).toPromise();
   }
 
-  async updatepull(pattern: string,data: any) {
+  // ***************** Remove Role From Applicaton *****************
+  async updatepull(pattern: string, data: any) {
     return await this.client.send(pattern, data).toPromise();
   }
 
