@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseFilters, UsePipes, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseFilters, UsePipes, Put, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from 'src/schemas/user.schema';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 @Controller('users')
@@ -14,16 +15,20 @@ export class UsersController {
     return this.usersService.findAll('user-findall');
   }
 
+
   @Get(':email')
   findOne(@Param('email') email: string) {
     return this.usersService.findOne('user-findone',email);
   }
+
 
   @Put(':_id')
   update(@Param('_id') _id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update('user-update',_id, updateUserDto);
   }
 
+
+  @UseGuards(JwtAuthGuard)
   @Delete(':_id')
   remove(@Param('_id') _id: string) {
     return this.usersService.remove('user-delete',_id);
@@ -55,6 +60,7 @@ export class UsersController {
     return this.usersService.confirmaccount('confirm-findall',{email,token,});
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/AffectRoleToUser')
   updatepush(@Body() data: any) {
     return this.usersService.updatepush('user-AffectRoleToUser',data);
