@@ -47,4 +47,11 @@ export class AffectationController {
     return this.affectationService.findByUserEmail('findByUserEmail', email);
   }
 
+  // ***************** Find Affectation By User id *****************
+  @UseGuards(JwtAuthGuard)
+  @Get('/findByUserID/:_id')
+  findByUserID(@Param('_id') _id: string) {
+    return this.affectationService.findByUserID('findByUserID', _id);
+  }
+
 }

@@ -38,4 +38,11 @@ export class AffectationService {
   async findByUserEmail(pattern: string, email: string) {
     return await this.client.send(pattern, email).toPromise();
   }
+
+   // ***************** Find Affectation By User id *****************
+    async findByUserID(pattern: string, _id: string) {
+      return await this.client.send(pattern, _id).toPromise();
+    }
+
+
 }
